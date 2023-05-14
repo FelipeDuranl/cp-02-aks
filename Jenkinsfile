@@ -3,9 +3,7 @@ pipeline {
   
   stages {
     stage('Checkout') {
-      steps {
-        git 'https://github.com/FelipeDuranl/cp-02-aks.git'
-      }
+      
     }
     
     stage('Build') {
