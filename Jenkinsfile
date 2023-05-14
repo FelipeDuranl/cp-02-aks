@@ -10,7 +10,7 @@ pipeline {
         
         stage('Deploy to AKS') {
             steps {
-                sh 'kubectl apply -f cp-02-aks/kubernetes/manifest.yaml'
+                sh 'kubectl apply -f manifest.yaml'
             }
         }
     }
