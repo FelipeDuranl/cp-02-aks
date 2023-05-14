@@ -1,27 +1,16 @@
 pipeline {
     agent any
     
-    tools {
-        nodejs 'Nome_da_Instalação_do_NodeJS'
-    }
-    
     stages {
-        
-        stage('Install') {
+        stage('Hello') {
             steps {
-                sh 'npm install'
-            }
-        }
-        
-        stage('Build') {
-            steps {
-                sh 'npm run build'
+                echo 'Hello, World!'
             }
         }
         
         stage('Deploy to AKS') {
             steps {
-                sh 'kubectl apply -f path/to/kubernetes/manifest.yaml'
+                sh 'kubectl apply -f /kubernetes/manifest.yaml'
             }
         }
     }
