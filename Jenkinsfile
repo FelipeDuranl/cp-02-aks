@@ -1,26 +1,28 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Build') {
-      steps {
-        sh 'npm install'  // Instalar as dependências do Node.js
-      }
+    agent any
+    
+    tools {
+        nodejs 'Nome_da_Instalação_do_NodeJS'
     }
     
-    stage('Deploy to AKS') {
-      environment {
-        KUBECONFIG = credentials('clusterUser_cp-02_aks-jenkins')
-      }
-      steps {
-        sh 'kubectl apply -f path/to/kubernetes/manifest.yaml'
-      }
+    stages {
+        
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        
+        stage('Deploy to AKS') {
+            steps {
+                sh 'kubectl apply -f path/to/kubernetes/manifest.yaml'
+            }
+        }
     }
-    
-    stage('Start Node.js Application') {
-      steps {
-        sh 'npm start'  // Iniciar o servidor Node.js
-      }
-    }
-  }
 }
