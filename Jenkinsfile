@@ -2,9 +2,9 @@ pipeline {
   agent any
   
   stages {
-    stage('Checkout') {
-      
-    }
+    steps {
+    git credentialsId: 'jenkins-token', url: 'https://github.com/FelipeDuranl/cp-02-aks.git'
+  }
     
     stage('Build') {
       steps {
