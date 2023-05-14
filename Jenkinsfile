@@ -1,11 +1,18 @@
 pipeline {
     agent any
     
+    tools {
+        kubernetesCli 'kubectl'
+    }
+    
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello, World!'
-            }
+        
+        stage('Build') {
+          steps {
+            // Instalar dependências e compilar o projeto
+            sh 'npm install'
+            sh 'npm run build'
+          }
         }
         
         stage('Deploy to AKS') {
