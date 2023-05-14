@@ -9,9 +9,12 @@ pipeline {
         }
         
         stage('Deploy to AKS') {
-            steps {
-                sh 'kubectl apply -f manifest.yaml'
-            }
+          environment {
+            KUBECONFIG = credentials('clusterUser_cp-02_aks-jenkins')
+          }
+          steps {
+            sh 'kubectl apply -f manifest.yaml'
+          }
         }
     }
 }
